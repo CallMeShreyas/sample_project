@@ -4,13 +4,13 @@ from .models import Staff
 from .serializer import StaffSerializer
 
 @api_view(['GET'])
-def get_staff(request):
+def get_staff_all(request):
     staff = Staff.objects.all()
     serializer = StaffSerializer(staff, many = True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def get_staff_all(request, id):
+def get_staff(request, id):
     staff = Staff.objects.get(id=id)
     serializer = StaffSerializer(staff)
     return Response(serializer.data)
