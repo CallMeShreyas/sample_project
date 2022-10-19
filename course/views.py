@@ -70,3 +70,47 @@ def put_course(request, id):
             "status": "failure",
             "info": serializer.errors
         })
+
+
+@api_view(['GET'])
+def get_test_all(request):
+    test = Test.objects.all()
+    serializer = TestSerializer(test, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_test(request, test_id, course_id):
+    course = Course.objects.filter(id = course_id)
+    if course.exists():
+        test = Test.objects.filter(id = test_id)
+        if test.exists():
+            serializer = TestSerializer(test, many = True)
+            return Response(serializer.data)
+        else:
+            return Response({
+                "status": "failure",
+                "info": "Test dose not exists"
+            })
+    else:
+        return Response({
+                "status": "failure",
+                "info": "Course dose not exists"
+            })
+
+@api_view(['POST'])
+def post_test(request):
+    data = request.data
+    serializer = TestSerializer(data = data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({
+            "status": "success",
+            "info": "Data Saved Successfully"
+        })
+
+    else:
+        return Response({
+            "status": "failure",
+            "info": serializer.errors
+        })

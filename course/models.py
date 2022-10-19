@@ -1,18 +1,21 @@
 from django.db import models
 from student.models import Student
+from django.utils import timezone
+from datetime import date
 # Create your models here.
 
 class Course(models.Model):
     name = models.CharField(max_length = 20)
-    date_created = models.DateField()
+    date_created = models.DateField(blank = True, null=True, default='')
 
     def __str__(self):
         return self.name
 
 class Test(models.Model):
     name = models.CharField(max_length = 20)
-    start_time = models.DateTimeField(blank = False)
-    end_time = models.DateTimeField(blank = False)
+    date = models.DateField(blank = True, null=True)
+    start_time = models.TimeField(blank = True)
+    end_time = models.TimeField(blank = True)
     course_related = models.ForeignKey(Course, on_delete = models.CASCADE)
     given_by = models.ForeignKey(Student, on_delete = models.CASCADE)
 
