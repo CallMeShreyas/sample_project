@@ -17,7 +17,7 @@ class Test(models.Model):
     start_time = models.TimeField(blank = True)
     end_time = models.TimeField(blank = True)
     course_related = models.ForeignKey(Course, on_delete = models.CASCADE)
-    given_by = models.ForeignKey(Student, on_delete = models.CASCADE)
+    given_to = models.ForeignKey(Student, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.name
