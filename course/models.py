@@ -12,7 +12,7 @@ class Course(models.Model):
         return self.name
 
 class Test(models.Model):
-    name = models.CharField(max_length = 20)
+    name = models.CharField(max_length = 100)
     date = models.DateField(blank = True, null=True)
     start_time = models.TimeField(blank = True)
     end_time = models.TimeField(blank = True)
