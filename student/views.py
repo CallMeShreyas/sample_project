@@ -4,8 +4,8 @@ from .models import Student
 from .serializer import StudentSerializer
 
 @api_view(['GET'])
-def get_student(request,roll):
-    student = Student.objects.filter(rollno = roll)
+def get_student(request,id):
+    student = Student.objects.filter(id = id)
     if student.exists():
         serializer = StudentSerializer(student, many=True)
         return Response(serializer.data)
@@ -60,7 +60,7 @@ def edit_student(request, id):
         else:
             return Response({
                 "status": "failure",
-                "info": "Roll number not found"
+                "info": "Student number not found"
             })
     else:
         return Response({
@@ -69,8 +69,8 @@ def edit_student(request, id):
         })
 
 @api_view(['GET'])
-def disable_student(request, roll):
-    student = Student.objects.filter(rollno = roll)
+def disable_student(request, id):
+    student = Student.objects.filter(id=id)
     if student.exists():
         student.update(disabled = True)
         return Response({
@@ -84,8 +84,8 @@ def disable_student(request, roll):
             })
 
 @api_view(['GET'])
-def enable_student(request, roll):
-    student = Student.objects.filter(rollno = roll)
+def enable_student(request, id):
+    student = Student.objects.filter(id=id)
     if student.exists():
         student.update(disabled = False)
         return Response({
