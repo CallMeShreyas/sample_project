@@ -11,5 +11,6 @@ urlpatterns = [
     path('post/<int:course_id>/', views.post_test, name = "POST test related to the course"),
     path('post/<int:course_id>/all/', views.post_test_for_all, name = "POST test related to the course"),
     path('get/question/<int:question_id>/', views.get_question, name = "GET question"),
-    path('post/<int:course_id>/<slug:test_name>/', views.post_question, name = "POST question")
+    path('post/<int:course_id>/<slug:test_name>/', views.post_question, name = "POST question"),
+    path('delete/<int:question_id>/', views.delete_question)
 ]

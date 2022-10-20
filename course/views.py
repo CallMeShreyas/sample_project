@@ -196,3 +196,64 @@ def post_question(request, course_id, test_name):
             "status": "failure",
             "info": "test dose not exists"
         })
+
+@api_view(['DELETE'])
+def delete_question(request, question_id):
+    question_of_id = Question.objects.filter(id = question_id)
+    question_all = Question.objects.filter(question = question_of_id[0].question)
+    if question_all.exists() and question_of_id.exists():
+        question_all.delete()
+        return Response({
+            "status": "success",
+            "info": "Qustion deleted successfully"
+        })
+    return Response({
+            "status": "failure",
+            "info": "Question dose not exists"
+        })
+
+
+    # data = request.data
+    # question = Question.objects.filter(question = data['name'])
+    # if question.exists():
+    #     test = Test.objects.filter(name = data['test_related'])
+    #     if test.exists():
+    #         # print("in 2nd if")
+    #         for t in test:
+    #             for q in question:
+    #                 print(q.id)
+    #                 if q.test_related == t.id:
+    #                     q.delete()
+    #     return Response({
+    #         "status": "success",
+    #         "info": "Qustion deleted successfully"
+    #     })
+    # else:
+    #     return Response({
+    #         "status": "failure",
+    #         "info": "Question dose not exists"
+    #     })
+
+    # data = request.data
+    # question = Question.objects.filter(name = data['name'])
+    # if question.exists():
+    #     test = Test.objects.all()
+    #     for i in test:
+    #         if i.name == data['test_related']:
+    #             i.delete()
+            
+
+    #     question.delete()
+    #     return Response({
+    #         "status": "success",
+    #         "info": "Question deleted successfully"
+    #     })    
+    # return Response({
+    #     "status": "failure",
+    #     "info": "Question not found"
+    # })
+
+    # {
+    #     "name": "question name",
+    #     "test_related": "test name"
+    # }
