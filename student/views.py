@@ -26,13 +26,6 @@ def post_student(request):
     data = request.data
     serializer = StudentSerializer(data = data)
     if serializer.is_valid():
-        roll = data['rollno']
-        student = Student.objects.filter(rollno = roll)
-        if student.exists():
-            return Response({
-                "status": "failure",
-                "info": "Roll no. already exists"
-            })
         username = data['user_name']
         student = Student.objects.filter(user_name = username)
         if student.exists():
@@ -52,11 +45,11 @@ def post_student(request):
     })
 
 @api_view(['PUT'])
-def edit_student(request, roll):
+def edit_student(request, id):
     data = request.data
     serializer = StudentSerializer(data = data)
     if serializer.is_valid():
-        student = Student.objects.filter(rollno = roll)
+        student = Student.objects.filter(id=id)
         if student.exists():
         # if not student:
             student.update(name= data['name'], surname= data['surname'], user_name= data['user_name'], password= data['password'])

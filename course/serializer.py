@@ -18,7 +18,6 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         # fields = ('name', "surname", 'user_name', 'password')
         fields = '__all__'
-        # exclude = ['test_related']
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
